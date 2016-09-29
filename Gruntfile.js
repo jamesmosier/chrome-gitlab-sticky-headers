@@ -1,4 +1,3 @@
-// Generated on 2015-03-10 using generator-chrome-extension 0.3.0
 'use strict';
 
 // # Globbing
@@ -18,7 +17,8 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    src: 'src'
   };
 
   grunt.initConfig({
@@ -28,13 +28,21 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['bowerInstall']
-      },
       js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        files: [
+          '<%= config.app %>/scripts/background.js',
+          '<%= config.app %>/scripts/chromereload.js'
+        ],
+        tasks: [],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
+      es6: {
+        files: [
+          '<%= config.src %>/js/*.js',
+        ],
+        tasks: ['browserify'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -77,15 +85,6 @@ module.exports = function (grunt) {
             '<%= config.app %>'
           ]
         }
-      },
-      test: {
-        options: {
-          open: false,
-          base: [
-            'test',
-            '<%= config.app %>'
-          ]
-        }
       }
     },
 
@@ -105,35 +104,18 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= config.app %>/scripts/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
-    },
-    mocha: {
-      all: {
-        options: {
-          run: true,
-          urls: ['http://localhost:<%= connect.options.port %>/index.html']
-        }
-      }
-    },
-
-    // Automatically inject Bower components into the HTML file
-    bowerInstall: {
-      app: {
-        src: [
-          '<%= config.app %>/*.html'
-        ]
-      }
-    },
+    // jshint: {
+    //   options: {
+    //     jshintrc: '.jshintrc',
+    //     reporter: require('jshint-stylish')
+    //   },
+    //   all: [
+    //     'Gruntfile.js',
+    //     '<%= config.app %>/scripts/{,*/}*.js',
+    //     '!<%= config.app %>/scripts/vendor/*',
+    //     'test/spec/{,*/}*.js'
+    //   ]
+    // },
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -155,29 +137,6 @@ module.exports = function (grunt) {
       },
       html: ['<%= config.dist %>/{,*/}*.html'],
       css: ['<%= config.dist %>/styles/{,*/}*.css']
-    },
-
-    // The following *-min tasks produce minifies files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/images',
-          src: '{,*/}*.{gif,jpeg,jpg,png}',
-          dest: '<%= config.dist %>/images'
-        }]
-      }
-    },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= config.dist %>/images'
-        }]
-      }
     },
 
     htmlmin: {
@@ -246,18 +205,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Run some tasks in parallel to speed up build process
-    concurrent: {
-      chrome: [
-      ],
-      dist: [
-        'imagemin',
-        'svgmin'
-      ],
-      test: [
-      ]
-    },
-
     // Auto buildnumber, exclude debug files. smart builds that event pages
     chromeManifest: {
       dist: {
@@ -292,28 +239,35 @@ module.exports = function (grunt) {
           dest: ''
         }]
       }
+    },
+
+    browserify: {
+      dist: {
+        options: {
+          browserifyOptions: { debug: true },
+          transform: [["babelify", { "presets": ["es2015"] }]],
+        },
+        files: {
+          'app/scripts/contentscript.js': 'src/js/main.js'
+        }
+      }
     }
+
   });
 
   grunt.registerTask('debug', function () {
     grunt.task.run([
-      'jshint',
-      'concurrent:chrome',
+      'browserify',
       'connect:chrome',
       'watch'
     ]);
   });
 
-  grunt.registerTask('test', [
-    'connect:test',
-    'mocha'
-  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'chromeManifest:dist',
     'useminPrepare',
-    'concurrent:dist',
     // No UI feature selected, cssmin task will be commented
     // 'cssmin',
     'concat',
@@ -324,8 +278,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'jshint',
-    'test',
+    // 'jshint',
     'build'
   ]);
 };

@@ -21,8 +21,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://github.com/*",
-        "https://github.com/*"
+        "http://gitlab.com/*",
+        "https://gitlab.com/*"
       ],
       "js": [
         "scripts/contentscript.js"

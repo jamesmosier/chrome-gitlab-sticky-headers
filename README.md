@@ -1,30 +1,19 @@
-![Chrome Github Sticky Headers Logo](app/images/icon-48.png)  chrome-github-sticky-headers
-========================
-
-[![Available in the Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png)](https://chrome.google.com/webstore/detail/github-sticky-headers/gmilkdlfpkmfghknimmhhhjbagdbfnjf)
+![Chrome Gitlab Sticky Headers Logo](app/images/icon-48.png)  chrome-gitlab-sticky-headers
 ========================
 
 
-> The first rule of classes is that they should be small.<br/>
-> The second rule of classes is that they should be smaller than that.
->
-> -- <cite>Robert C. Martin, Clean Code</cite>
+##About
 
-...unfortunately this is not always the case.<br/>
-This chrome extension helps you reviewing those 1000 loc files having the current file header always visible while scrolling through the page.
+Forked from [chrome-github-sticky-headers](https://github.com/danybony/chrome-github-sticky-headers), this implementation can be used on gitlab.com. Currently this is not in the Chrome extensions store. This is a WIP, as I am rewriting it in ES2015. Although **this fully works** if you import it manually as a Chrome extension.
 
-**NEW**: you can now collapse and expand some or all of the changed files.
-
-![Chrome Github Sticky Headers Screenshot](raw/screenshot_1.png)
 
 ##Development
 
-You need to have NodeJS with `grunt-cli` and `bower` installed.
+You need to have NodeJS with `grunt-cli` installed.
 
 ```shell
-$ npm install -g grunt-cli bower
+$ npm install -g grunt-cli
 $ npm install
-$ bower install
 ```
 
 To debug the application with a live reload mechanism, run:
@@ -34,6 +23,9 @@ $ grunt debug
 ```
 
 Then add the `app` folder as an unpacked extension in Chrome.
+
+
+
 
 ##License
 
