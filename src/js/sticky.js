@@ -33,7 +33,7 @@ class Sticky {
         fileHeaders[i].style.top = '0px';
         fileHeaders[i].style.position = 'absolute';
         fileHeaders[i].style.width = '100%';
-        fileHeaders[i].style.zIndex = 9;
+        fileHeaders[i].style.zIndex = 11;
       }
     };
 
