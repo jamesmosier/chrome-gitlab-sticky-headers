@@ -30,16 +30,6 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: [
-          '<%= config.app %>/scripts/background.js',
-          '<%= config.app %>/scripts/chromereload.js'
-        ],
-        tasks: [],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
-      es6: {
-        files: [
           '<%= config.src %>/js/*.js',
         ],
         tasks: ['browserify'],
@@ -242,13 +232,31 @@ module.exports = function (grunt) {
     },
 
     browserify: {
-      dist: {
+      main: {
         options: {
           browserifyOptions: { debug: true },
           transform: [["babelify", { "presets": ["es2015"] }]],
         },
         files: {
-          'app/scripts/contentscript.js': 'src/js/main.js'
+          'app/scripts/contentscript.js': 'src/js/main.js',
+        }
+      },
+      reload: {
+        options: {
+          browserifyOptions: { debug: true },
+          transform: [["babelify", { "presets": ["es2015"] }]],
+        },
+        files: {
+          'app/scripts/chromereload.js': 'src/js/livereload.js'
+        }
+      },
+      background: {
+        options: {
+          browserifyOptions: { debug: true },
+          transform: [["babelify", { "presets": ["es2015"] }]],
+        },
+        files: {
+          'app/scripts/background.js': 'src/js/background.js'
         }
       }
     }
