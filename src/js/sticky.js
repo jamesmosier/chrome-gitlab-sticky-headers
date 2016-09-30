@@ -1,11 +1,11 @@
-class Sticky  {
+class Sticky {
   constructor() {
   }
 
   init() {
     let prToolbarHeight;
     let fileContainers = document.querySelectorAll('[data-blob-diff-path]');
-    let fileHeaders = document.querySelectorAll("[id^='file-path-']");
+    let fileHeaders = document.querySelectorAll('[id^="file-path-"]');
 
     const getPrToolbarHeight = () => {
       const toolbars = document.getElementsByClassName('merge-request-tabs');
