@@ -1,7 +1,8 @@
 import Sticky from './sticky';
 
 const listener = (request) => {
-  if (request.type === 'init') {
+  const isMergeRequest = window.location.href.indexOf('merge_requests') > -1;
+  if (request.type === 'init' && isMergeRequest) {
     const target = document.getElementById('diffs');
 
     // wait for the diff files (#diffs) to load
