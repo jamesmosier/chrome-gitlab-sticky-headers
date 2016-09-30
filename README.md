@@ -4,7 +4,10 @@
 
 ##About
 
-Forked from [chrome-github-sticky-headers](https://github.com/danybony/chrome-github-sticky-headers), this implementation can be used on gitlab.com. Currently this is not in the Chrome extensions store. This is a WIP, as I am rewriting it in ES2015. Although **this fully works** if you import it manually as a Chrome extension.
+Forked from [chrome-github-sticky-headers](https://github.com/danybony/chrome-github-sticky-headers), this implementation can be used on gitlab.com. Currently this is not in the Chrome extensions store.
+
+
+![Chrome Gitlab Sticky Headers Screenshot](raw/screenshot-1.png)
 
 
 ##Development
