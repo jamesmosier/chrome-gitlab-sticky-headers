@@ -9,7 +9,7 @@ const listener = (request) => {
         diffsFiles.className += ' sticky-init';
         new Sticky().init();
       }
-    }, 2500);
+    }, 4000);
   }
 };
 
