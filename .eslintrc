@@ -1,0 +1,21 @@
+{
+  "extends": "airbnb-base",
+  "root": true,
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "strict": [2, "never"],
+    "global-require": 0,
+    "no-param-reassign": 0
+  },
+  "settings": {
+  }
+}
