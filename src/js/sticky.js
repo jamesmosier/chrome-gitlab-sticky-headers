@@ -8,7 +8,7 @@ class Sticky {
   static getPrToolbarHeight() {
     const toolbar = document.querySelector('.merge-request-tabs');
     const height = toolbar.getBoundingClientRect().height;
-    return height + 50;
+    return height + 100;
   }
 
   static setHeaderTop(fileHeader, topPosition) {
@@ -26,7 +26,7 @@ class Sticky {
       this.fileHeaders[i].style.top = '0px';
       this.fileHeaders[i].style.position = 'absolute';
       this.fileHeaders[i].style.width = '100%';
-      this.fileHeaders[i].style.zIndex = 11;
+      this.fileHeaders[i].style.zIndex = 9;
     }
   }
 
